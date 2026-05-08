@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>下载见证者教练</title>
+  <meta name="description" content="见证者教练 iOS / Android 下载入口（按系统自动分流）">
+  <!-- iOS Safari 顶部「Open App / Download from App Store」横幅。
+       app-id 填入实际 App Store 数字 ID 后生效；空着也不报错。 -->
+  <meta name="apple-itunes-app" content="app-id=APP_STORE_ID_PLACEHOLDER">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #fbf6ea, #f8f1e4);
+      color: #23201c;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 26px;
+      margin: 0 0 14px;
+      letter-spacing: 0.02em;
+    }
+    p {
+      color: #686054;
+      line-height: 1.7;
+      margin: 8px 0;
+    }
+    .spinner {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #d9cdb8;
+      border-top-color: #0f619e;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: #0f619e;
+      color: #fffdf8;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .small {
+      color: #8e8779;
+      font-size: 13px;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner" aria-hidden="true"></div>
+  <h1 id="title">正在跳转到下载页面…</h1>
+  <p id="hint">如果 1 秒内没有自动跳转：</p>
+  <a id="manual-link" class="button" href="support.html">手动打开</a>
+  <p class="small">见证者教练 · 本地优先，无需账号</p>
+
+  <script>
+    (function () {
+      // ---- 平台分流目标 ----
+      // App Store 数字 ID。1.4 / 1.5 train 还在审核中，留空时回落到搜索 URL；
+      // 数字 ID 拿到（在 App Store Connect → My Apps → 见证者教练 → 应用信息 → Apple ID）
+      // 之后填进来一次即可，所有分享卡片的二维码无需再改。
+      var APP_STORE_ID = '';
+
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      var isAndroid = /android/i.test(ua);
+
+      var target;
+      var label;
+      if (isIOS) {
+        target = APP_STORE_ID
+          ? 'https://apps.apple.com/cn/app/id' + APP_STORE_ID
+          : 'https://apps.apple.com/cn/search?term=' + encodeURIComponent('见证者教练');
+        label = '正在跳转到 App Store…';
+      } else if (isAndroid) {
+        // 落到 support.html 的下载区锚点，让用户读到 APK 安装提示再点下载
+        target = 'support.html#download';
+        label = '正在跳转到 Android 下载页…';
+      } else {
+        // 桌面浏览器：直接看支持 / 下载页
+        target = 'support.html';
+        label = '正在跳转到支持页…';
+      }
+
+      // 手动 fallback 链接同步更新
+      document.getElementById('title').textContent = label;
+      document.getElementById('manual-link').href = target;
+
+      // 真正跳转。replace 而不是 assign —— 不在历史里留下当前中间页，
+      // 用户按 Back 直接回到分享卡片来源（朋友圈 / 小红书 / 浏览器）
+      setTimeout(function () { window.location.replace(target); }, 250);
+    })();
+  </script>
+</body>
+</html>
