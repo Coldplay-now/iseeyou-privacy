@@ -7,7 +7,7 @@
   <meta name="description" content="见证者教练 iOS / Android 下载入口（按系统自动分流）">
   <!-- iOS Safari 顶部「Open App / Download from App Store」横幅。
        app-id 填入实际 App Store 数字 ID 后生效；空着也不报错。 -->
-  <meta name="apple-itunes-app" content="app-id=APP_STORE_ID_PLACEHOLDER">
+  <meta name="apple-itunes-app" content="app-id=6766876720">
   <style>
     body {
       margin: 0;
@@ -70,10 +70,8 @@
   <script>
     (function () {
       // ---- 平台分流目标 ----
-      // App Store 数字 ID。1.4 / 1.5 train 还在审核中，留空时回落到搜索 URL；
-      // 数字 ID 拿到（在 App Store Connect → My Apps → 见证者教练 → 应用信息 → Apple ID）
-      // 之后填进来一次即可，所有分享卡片的二维码无需再改。
-      var APP_STORE_ID = '';
+      // App Store 数字 ID。这个 ID 跨版本永久固定（App Store Connect → 应用信息 → Apple ID）。
+      var APP_STORE_ID = '6766876720';
 
       var ua = navigator.userAgent || '';
       var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
