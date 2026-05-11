@@ -126,6 +126,47 @@
       letter-spacing: 0.02em;
     }
 
+    /* App 截图横向滚动 gallery。手机端用 scroll-snap，桌面也支持横滑或鼠标拖动。 */
+    .shots {
+      margin: 22px -6px 8px;
+      padding: 6px;
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .shots img {
+      flex: 0 0 auto;
+      width: 220px;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 28px rgba(35, 32, 28, 0.08);
+      background: var(--paper);
+      scroll-snap-align: start;
+    }
+
+    .shots-hint {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 2px 4px 0;
+    }
+
+    @media (max-width: 640px) {
+      .shots {
+        margin-left: -18px;
+        margin-right: -18px;
+        padding: 6px 18px;
+      }
+      .shots img {
+        width: 180px;
+        border-radius: 14px;
+      }
+    }
+
     /* 右下角悬浮下载按钮（FAB）。
        默认 hidden，由 JS 在滚出顶部 .actions 后显形；回到顶部再隐去。
        桌面端、移动端通用，桌面右侧空间也够，不挤占阅读区。 */
@@ -209,7 +250,7 @@
   <main>
     <article>
       <h1>见证者教练技术支持</h1>
-      <p class="meta">更新日期：2026年5月8日</p>
+      <p class="meta">更新日期：2026年5月11日</p>
 
       <p class="summary">
         见证者教练是一款面向教练学习者的阅读、练习记录与知识卡片应用，支持 iOS 与 Android 双平台。如果你在使用过程中遇到问题，欢迎通过本页提交反馈；Android 用户也可在「下载与安装」一节获取最新 APK。
@@ -220,6 +261,22 @@
         <a class="button" href="https://github.com/Coldplay-now/iseeyou-privacy/releases/download/android-v1.0.0/iseeyou-android-1.0.0.apk" data-android-apk>下载 Android APK<span class="beta-tag">公测</span></a>
         <a class="button" href="https://github.com/Coldplay-now/iseeyou-privacy/issues">问题反馈</a>
         <a class="button" href="privacy.html">隐私政策</a>
+      </div>
+
+      <h2 id="screenshots">App 截图</h2>
+      <p>iPhone 实机截图。左右滑动可查看更多。</p>
+      <div class="shots" role="list" aria-label="App 截图预览">
+        <img src="screenshots/iphone/IMG_7586.jpg" alt="见证者教练 iPhone 截图 1" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7587.jpg" alt="见证者教练 iPhone 截图 2" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7588.jpg" alt="见证者教练 iPhone 截图 3" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7589.jpg" alt="见证者教练 iPhone 截图 4" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7590.jpg" alt="见证者教练 iPhone 截图 5" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7591.jpg" alt="见证者教练 iPhone 截图 6" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7592.jpg" alt="见证者教练 iPhone 截图 7" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7593.jpg" alt="见证者教练 iPhone 截图 8" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7594.jpg" alt="见证者教练 iPhone 截图 9" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7595.jpg" alt="见证者教练 iPhone 截图 10" loading="lazy" width="600" height="1299">
+        <img src="screenshots/iphone/IMG_7596.jpg" alt="见证者教练 iPhone 截图 11" loading="lazy" width="600" height="1299">
       </div>
 
       <h2 id="download">1. 下载与安装</h2>
